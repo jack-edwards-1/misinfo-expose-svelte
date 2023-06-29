@@ -20,12 +20,13 @@
 </script>
 
 <main class="container">
-  <Info />
+  <h1>Misinformation Exposure</h1>
+  <!-- <Info /> -->
   <Input on:updateScoresObj={updateScores} />
   {#if scores_obj.inputEntered}
-    <Results {...scores_obj} />
+    <!-- <Results {...scores_obj} />
     <Exposure misinfo={scores_obj.misinfo} />
-    <Partisanship party={scores_obj.party} />
+    <Partisanship party={scores_obj.party} /> -->
     <Table
       following={scores_obj.following}
       username={scores_obj.username}

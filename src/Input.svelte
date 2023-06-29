@@ -169,9 +169,7 @@
 				Scores for <a
 					href={userurl}
 					target="_blank"
-					style="color: #63d2ff">{scores_obj.username}</a
-				>
-				(ID: {scores_obj.userid})
+					style="color: #63d2ff">@{scores_obj.username}</a>
 			</p>
 		{/if}
 	{/await}
