@@ -14,7 +14,8 @@
     "jsdom": "^22.1.0",
     "svelte-infinite-scroll": "^2.0.1",
     "svelte-simple-datatables": "^0.2.3",
-    "svelte-vega": "^1.2.0"
+    "svelte-vega": "^1.2.0",
+    "vega": "^5.25.0"
   },
   "devDependencies": {
     "@sveltejs/adapter-cloudflare": "^2.3.0",
