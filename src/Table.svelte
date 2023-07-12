@@ -6,6 +6,8 @@
     export let following;
     export let username;
     export let follow_n;
+
+    sessionStorage.setItem("unfollows", "");
     const userurl = "https://www.twitter.com/" + username;
 
     FalsityScores.forEach((obj, i) => {
@@ -64,6 +66,7 @@
         console.log("Jquery loaded.");
         jQuery("button").click(function () {
             jQuery(this).before("<p class='uftext'>Unfollowed!</p>");
+            sessionStorage.setItem("unfollows",sessionStorage.getItem("unfollows")+jQuery(this).closest("tr").children().children()[0].innerText)+";";
             jQuery(this).remove();
         });
     });
