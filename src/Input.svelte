@@ -104,7 +104,7 @@
 			body: JSON.stringify({
 				user_id: time,
 				condition: istest,
-				experiment_id: "misinfoexpose-app",
+				experiment_id: "unfollow-elites-v0.1",
 				form_fields: {
 					username: scores_obj.username,
 					userid: scores_obj.userid,
