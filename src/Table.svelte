@@ -66,7 +66,7 @@
         console.log("Jquery loaded.");
         jQuery("button").click(function () {
             jQuery(this).before("<p class='uftext'>Unfollowed!</p>");
-            sessionStorage.setItem("unfollows",sessionStorage.getItem("unfollows")+jQuery(this).closest("tr").children().children()[0].innerText)+";";
+            sessionStorage.setItem("unfollows",sessionStorage.getItem("unfollows")+jQuery(this).closest("tr").children().children()[0].innerText+";");
             jQuery(this).remove();
         });
     });
