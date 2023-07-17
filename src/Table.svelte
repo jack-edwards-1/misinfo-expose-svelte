@@ -38,6 +38,11 @@
         return "Very Rarely Dishonest";
     };
 
+    const postUnfollowsToServer = (unfollows) => {
+        //insert serverside connection here
+
+        console.log("Posting to server:", sessionStorage.getItem("unfollows"));
+    };
     let data = [];
     following.forEach((val, i) => {
         data.push({
@@ -46,7 +51,8 @@
                 "<a href='https://twitter.com/" +
                 val +
                 "' target='_blank' class='profile-link'>" +
-                "@" + val +
+                "@" +
+                val +
                 "</a>",
             FalsityScore: getFalsityScore(val),
         });
@@ -66,12 +72,21 @@
         console.log("Jquery loaded.");
         jQuery("button").click(function () {
             jQuery(this).before("<p class='uftext'>Unfollowed!</p>");
-            sessionStorage.setItem("unfollows",sessionStorage.getItem("unfollows")+jQuery(this).closest("tr").children().children()[0].innerText+";");
+            sessionStorage.setItem(
+                "unfollows",
+                sessionStorage.getItem("unfollows") +
+                    jQuery(this).closest("tr").children().children()[0]
+                        .innerText +
+                    ";"
+            );
             jQuery(this).remove();
-            console.log(sessionStorage.getItem("unfollows"));
+        });
+        jQuery("#submitForm").submit(function () {
+            console.log("updated submit behavior");
+            postUnfollowsToServer();
+            return false;
         });
     });
-
 </script>
 
 <main>
@@ -79,8 +94,14 @@
         <p class="center-text">
             Here's a review of the {follow_n} political accounts
             <strong>
-                <a href={userurl} target="_blank" rel="noreferrer" style="color: #63d2ff">
-                    {username}</a>
+                <a
+                    href={userurl}
+                    target="_blank"
+                    rel="noreferrer"
+                    style="color: #63d2ff"
+                >
+                    {username}</a
+                >
             </strong>
             follows.
         </p>
@@ -104,11 +125,22 @@
 
             {#each elites as elite}
                 <tr class="following">
-                    <td>{@html elite.Elite}<br></td>
+                    <td>{@html elite.Elite}<br /></td>
                     <td>
                         {gradeFromScore(100 * (1 - elite.FalsityScore))}<br />
                         <div id="progress-bar" class="all-rounded">
-                            <div id="progress-bar-percentage" class={"all-rounded "+gradeFromScore(100 * (1 - elite.FalsityScore))} style={"width:"+(20+100*(1- elite.FalsityScore))+"%"}><span></span></div>
+                            <div
+                                id="progress-bar-percentage"
+                                class={"all-rounded " +
+                                    gradeFromScore(
+                                        100 * (1 - elite.FalsityScore)
+                                    )}
+                                style={"width:" +
+                                    (20 + 100 * (1 - elite.FalsityScore)) +
+                                    "%"}
+                            >
+                                <span />
+                            </div>
                         </div>
                     </td>
                     <td>
@@ -117,6 +149,9 @@
                 </tr>
             {/each}
         </table>
+        <form id="submitForm">
+            <input type="submit" class="submit" value="Submit" />
+        </form>
     </div>
 </main>
 
@@ -174,46 +209,46 @@
         padding: 8px;
     }
     #progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #cccccc;
-    position: relative;
-    overflow: hidden;
-}
+        width: 100%;
+        height: 8px;
+        background: #cccccc;
+        position: relative;
+        overflow: hidden;
+    }
 
-#progress-bar-percentage.Frequently {
-    background: #ff0000;
-    padding: 5px 0px;
-    color: #FFF;
-    text-align: center;
-    height: 20px;
-}
-#progress-bar-percentage.Sometimes {
-    background: #ff8000;
-    padding: 5px 0px;
-    color: #FFF;
-    text-align: center;
-    height: 20px;
-}
-#progress-bar-percentage.Occasionally {
-    background: #ffff00;
-    padding: 5px 0px;
-    color: #FFF;
-    text-align: center;
-    height: 20px;
-}
-#progress-bar-percentage.Rarely {
-    background: #00ff00;
-    padding: 5px 0px;
-    color: #FFF;
-    text-align: center;
-    height: 20px;
-}
+    #progress-bar-percentage.Frequently {
+        background: #ff0000;
+        padding: 5px 0px;
+        color: #fff;
+        text-align: center;
+        height: 20px;
+    }
+    #progress-bar-percentage.Sometimes {
+        background: #ff8000;
+        padding: 5px 0px;
+        color: #fff;
+        text-align: center;
+        height: 20px;
+    }
+    #progress-bar-percentage.Occasionally {
+        background: #ffff00;
+        padding: 5px 0px;
+        color: #fff;
+        text-align: center;
+        height: 20px;
+    }
+    #progress-bar-percentage.Rarely {
+        background: #00ff00;
+        padding: 5px 0px;
+        color: #fff;
+        text-align: center;
+        height: 20px;
+    }
 
-#progress-bar-percentage span {
-    display: inline-block;
-    position: absolute;
-    width: 100%;
-    left: 0;
-}
+    #progress-bar-percentage span {
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        left: 0;
+    }
 </style>
