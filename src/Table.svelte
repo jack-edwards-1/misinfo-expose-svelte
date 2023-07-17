@@ -149,6 +149,7 @@
                 </tr>
             {/each}
         </table>
+        <br>
         <form id="submitForm">
             <input type="submit" class="submit" value="Submit" />
         </form>
@@ -250,5 +251,26 @@
         position: absolute;
         width: 100%;
         left: 0;
+    }
+    form {
+        text-align: center;
+    }
+    input[type="submit"] {
+        padding: 5px 15px;
+        background: white;
+        border: 0 none;
+        font-size: 16px;
+        cursor: pointer;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+    input[type="submit"]:hover {
+        padding: 5px 15px;
+        background: grey;
+        border: 0 none;
+        font-size: 16px;
+        cursor: pointer;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
     }
 </style>
