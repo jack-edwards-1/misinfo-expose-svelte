@@ -17,13 +17,17 @@
     scores_obj["misinfo_mean"] = misinfo_mean;
     scores_obj["partisan_mean"] = partisan_mean;
   };
+  const validate = (e) => {
+    // username validation checks
+    return e;
+  };
 </script>
 
 <main class="container">
   <h1>Misinformation Exposure</h1>
   <!-- <Info /> -->
   <Input on:updateScoresObj={updateScores} />
-  {#if scores_obj.inputEntered}
+  {#if validate(scores_obj.inputEntered)}
     <!-- <Results {...scores_obj} />
     <Exposure misinfo={scores_obj.misinfo} />
     <Partisanship party={scores_obj.party} /> -->

@@ -126,11 +126,6 @@
 		}
 		return response;
 	}
-	//get username from qualtrics
-	window.addEventListener("message", (event) => {
-		console.log(event.data);
-		user = event.data;
-	});
 </script>
 
 <main>
