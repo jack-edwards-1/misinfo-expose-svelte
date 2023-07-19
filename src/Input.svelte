@@ -126,6 +126,11 @@
 		}
 		return response;
 	}
+	//get username from qualtrics
+	window.addEventListener("message", (event) => {
+		console.log(event.data);
+		user = event.data;
+	});
 </script>
 
 <main>
@@ -169,7 +174,8 @@
 				Scores for <a
 					href={userurl}
 					target="_blank"
-					style="color: #63d2ff">@{scores_obj.username}</a>
+					style="color: #63d2ff">@{scores_obj.username}</a
+				>
 			</p>
 		{/if}
 	{/await}
