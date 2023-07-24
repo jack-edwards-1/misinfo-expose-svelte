@@ -40,9 +40,9 @@
 
     const postUnfollowsToServer = (unfollows) => {
         //insert serverside connection here
-
         console.log("Posting to server:", sessionStorage.getItem("unfollows"));
     };
+
     let data = [];
     following.forEach((val, i) => {
         data.push({
@@ -57,6 +57,7 @@
             FalsityScore: getFalsityScore(val),
         });
     });
+
     // sort values
     data = data.sort((a, b) => (a.FalsityScore > b.FalsityScore ? -1 : 1));
     // reset i values in data
@@ -68,6 +69,7 @@
     let size = 10000;
     let elites = [];
     $: elites = [...elites, ...data.splice(size * page, size * (page + 1) - 1)];
+
     jQuery(document).ready(function () {
         console.log("Jquery loaded.");
         jQuery("button").click(function () {
@@ -80,11 +82,6 @@
                     ";"
             );
             jQuery(this).remove();
-        });
-        jQuery("#submitForm").submit(function () {
-            console.log("updated submit behavior");
-            postUnfollowsToServer();
-            return false;
         });
     });
 </script>
@@ -149,10 +146,10 @@
                 </tr>
             {/each}
         </table>
-        <br>
-        <form id="submitForm">
+        <br />
+        <!-- <form id="submitForm">
             <input type="submit" class="submit" value="Submit" />
-        </form>
+        </form> -->
     </div>
 </main>
 

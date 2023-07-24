@@ -43,7 +43,6 @@
 </script>
 
 <main class="container">
-  <h1>Misinformation Exposure</h1>
   <Input on:updateScoresObj={updateScores} {username} />
   {#if validate(scores_obj.inputEntered)}
     <!-- <Results {...scores_obj} />

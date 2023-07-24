@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 
 	let scores_obj;
-	export let username; // take value from App.svelte
+	export let username = ""; // take value from App.svelte
 	let userid = "";
 	let istest = "test";
 	let currentUser = username;
@@ -10,6 +10,9 @@
 	let testuser = null;
 	let testusers = ["andrewyang", "benshapiro", "aoc", "sentedcruz"];
 	let userurl = "https://twitter.com/";
+
+	username = username.trim().toLowerCase();
+	console.log("username", username);
 
 	const saveSearchURL = import.meta.env.VITE_APIURL;
 
@@ -128,34 +131,6 @@
 </script>
 
 <main>
-	<p class="small">
-		Enter your Twitter username/ID below to find out or click <strong
-			><a
-				href="#"
-				on:click|preventDefault={() => {
-					dispatchNothing();
-					testuser = choose(testusers);
-					username = testuser;
-					istest = "test";
-					scores = getScores(testuser);
-				}}>here</a
-			></strong
-		> to try the app.
-	</p>
-
-	<form
-		on:submit|preventDefault={() => {
-			dispatchNothing();
-			istest = "nottest";
-			currentUser = username;
-			submittedValue = username;
-			// console.log("user entered:", user);
-			scores = getScores(username);
-		}}
-	>
-		<input bind:value={username} />
-	</form>
-
 	{#await scores then scores}
 		{#if scores == "nothing"}
 			<p />
@@ -196,18 +171,7 @@
 		font-size: 1.1em;
 	}
 
-	input {
-		height: 20px;
-		border: 1px solid #63d2ff;
-		border-top: 0px;
-		border-radius: 3px;
-		padding: 8px;
-		width: 98%;
-	}
 	@media (max-width: 500px) {
-		input {
-			width: 89%;
-		}
 		.error {
 			width: 89%;
 		}
