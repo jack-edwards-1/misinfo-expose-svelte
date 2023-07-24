@@ -21,11 +21,29 @@
     // username validation checks
     return e;
   };
+
+  const getQueryString = (a) => {
+    if (a === undefined) {
+      var a = window.location.search;
+    }
+    const substridx = a.indexOf("?");
+    a = a.substr(substridx + 1).split("&");
+    if (a == "") return {};
+    let b = {};
+    for (let i = 0; i < a.length; ++i) {
+      let p = a[i].split("=", 2);
+      if (p.length == 1) b[p[0]] = "";
+      else b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    console.log("URL params: ", b);
+    return b;
+  };
+  let queryParams = getQueryString();
+  queryParams["username"];
 </script>
 
 <main class="container">
   <h1>Misinformation Exposure</h1>
-  <!-- <Info /> -->
   <Input on:updateScoresObj={updateScores} />
   {#if validate(scores_obj.inputEntered)}
     <!-- <Results {...scores_obj} />
