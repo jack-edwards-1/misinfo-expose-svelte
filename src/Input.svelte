@@ -2,10 +2,10 @@
 	import { createEventDispatcher } from "svelte";
 
 	let scores_obj;
-	let user = "";
+	export let username; // take value from App.svelte
 	let userid = "";
 	let istest = "test";
-	let currentUser = user;
+	let currentUser = username;
 	let submittedValue = null;
 	let testuser = null;
 	let testusers = ["andrewyang", "benshapiro", "aoc", "sentedcruz"];
@@ -22,24 +22,23 @@
 
 	const dispatchNothing = () => {
 		dispatch("updateScoresObj", {
-			username: user,
+			username: username,
 			inputEntered: false,
 		});
 	};
 
-	async function getScores(user) {
-		// console.log("istest:", istest);
-		if (user == "") {
+	async function getScores(username) {
+		if (username == "") {
 			return "nothing";
 		}
-		if (user.slice(0, 1) == "@") {
-			user = user.slice(1);
+		if (username.slice(0, 1) == "@") {
+			username = username.slice(1);
 		}
-		user = user.trim();
-		user = user.toLowerCase();
+		username = username.trim();
+		username = username.toLowerCase();
 
 		const resp = await fetch(
-			"https://mescalc.p.rapidapi.com/account/" + user,
+			"https://mescalc.p.rapidapi.com/account/" + username,
 			{
 				method: "GET",
 				headers: {
@@ -59,7 +58,7 @@
 			if (response.message) {
 				// console.log("Error: " + response.message);
 				scores_obj = {
-					username: user,
+					username: username,
 					inputEntered: false,
 					message: "cannot find user",
 				};
@@ -69,7 +68,7 @@
 				userid = response.twitter_user_id;
 				userid = userid.toString();
 				scores_obj = {
-					username: user,
+					username: username,
 					userid: userid,
 					misinfo: response.misinfo_exposure_score_weighted_numtweets,
 					party: response.partisan_score,
@@ -77,7 +76,7 @@
 					following: response.following,
 					inputEntered: true,
 				};
-				userurl += user;
+				userurl += username;
 				dispatch("updateScoresObj", scores_obj);
 				let post_outcome = saveSearch();
 			}
@@ -89,7 +88,7 @@
 			return null;
 		}
 	}
-	let scores = getScores(user);
+	let scores = getScores(username);
 
 	async function saveSearch() {
 		let time = "t-" + Date.now().toString();
@@ -136,7 +135,7 @@
 				on:click|preventDefault={() => {
 					dispatchNothing();
 					testuser = choose(testusers);
-					user = testuser;
+					username = testuser;
 					istest = "test";
 					scores = getScores(testuser);
 				}}>here</a
@@ -148,13 +147,13 @@
 		on:submit|preventDefault={() => {
 			dispatchNothing();
 			istest = "nottest";
-			currentUser = user;
-			submittedValue = user;
+			currentUser = username;
+			submittedValue = username;
 			// console.log("user entered:", user);
-			scores = getScores(user);
+			scores = getScores(username);
 		}}
 	>
-		<input bind:value={user} />
+		<input bind:value={username} />
 	</form>
 
 	{#await scores then scores}

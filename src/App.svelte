@@ -39,12 +39,12 @@
     return b;
   };
   let queryParams = getQueryString();
-  queryParams["username"];
+  let username = queryParams["username"];
 </script>
 
 <main class="container">
   <h1>Misinformation Exposure</h1>
-  <Input on:updateScoresObj={updateScores} />
+  <Input on:updateScoresObj={updateScores} {username} />
   {#if validate(scores_obj.inputEntered)}
     <!-- <Results {...scores_obj} />
     <Exposure misinfo={scores_obj.misinfo} />
