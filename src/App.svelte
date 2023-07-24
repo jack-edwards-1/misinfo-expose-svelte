@@ -42,25 +42,23 @@
   let username = queryParams["username"];
 </script>
 
-<main class="container">
-  <Input on:updateScoresObj={updateScores} {username} />
-  {#if validate(scores_obj.inputEntered)}
-    <!-- <Results {...scores_obj} />
+<div class="mainDiv">
+  <main class="container">
+    <Input on:updateScoresObj={updateScores} {username} />
+    {#if validate(scores_obj.inputEntered)}
+      <!-- <Results {...scores_obj} />
     <Exposure misinfo={scores_obj.misinfo} />
     <Partisanship party={scores_obj.party} /> -->
-    <Table
-      following={scores_obj.following}
-      username={scores_obj.username}
-      follow_n={scores_obj.follow_n}
-    />
-  {/if}
-</main>
+      <Table
+        following={scores_obj.following}
+        username={scores_obj.username}
+        follow_n={scores_obj.follow_n}
+      />
+    {/if}
+  </main>
+</div>
 
 <style>
-  .container {
-    margin: 50px 200px 50px 200px;
-  }
-
   @media (max-width: 1000px) {
     .container {
       margin: 50px;

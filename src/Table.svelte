@@ -89,7 +89,7 @@
 <main>
     {#if follow_n > 1}
         <p class="center-text">
-            Here's a review of the {follow_n} political accounts
+            Below are {follow_n} accounts
             <strong>
                 <a
                     href={userurl}
@@ -104,7 +104,7 @@
         </p>
     {:else}
         <p class="center-text">
-            Here's a review of the political account
+            Below is an account
             <strong>
                 <a href={userurl} target="_blank" style="color: #63d2ff">
                     {username}
@@ -112,6 +112,7 @@
             </strong>
             follows.
         </p>{/if}
+
     <div class="center">
         <table>
             <tr style="background-color:#94adc4">

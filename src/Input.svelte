@@ -130,6 +130,7 @@
 	}
 </script>
 
+<!-- 
 <main>
 	{#await scores then scores}
 		{#if scores == "nothing"}
@@ -148,7 +149,7 @@
 			</p>
 		{/if}
 	{/await}
-</main>
+</main> -->
 
 <style>
 	.small {
